@@ -30,6 +30,13 @@ def login():
 @app.route('/protected', methods=['GET'])
 @jwt_required()
 def protected():
+/*************  ✨ Windsurf Command ⭐  *************/
+    """
+    Rota protegida. Requer token JWT.
+
+    Retorna uma mensagem de que a rota protegida foi acessada.
+    """
+/*******  f506a6b0-c008-4969-a4f5-81eed3bb4534  *******/
     return jsonify(message="Protected route")
 
 if __name__ == '__main__':
