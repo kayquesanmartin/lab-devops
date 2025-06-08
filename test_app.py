@@ -7,7 +7,6 @@ werkzeug
 if not hasattr(werkzeug, '__version__'):
     werkzeug.__version__ = "mock-version"
 
-
 class APITestCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -30,19 +29,16 @@ class APITestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 401)
 
     def test_api_root(self):
-        """Testa se a API está respondendo na raiz"""
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json, {"message": "API is running"})
 
     def test_login_returns_token(self):
-        """Testa se o login retorna um token"""
         response = self.client.post('/login')
         self.assertEqual(response.status_code, 200)
         self.assertTrue('access_token' in response.json)
 
     def test_protected_route_blocks_unauthorized(self):
-        """Testa se a rota protegida bloqueia acesso sem token"""
         response = self.client.get('/protected')
         self.assertEqual(response.status_code, 401)
 
