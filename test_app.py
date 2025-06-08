@@ -6,6 +6,7 @@ import werkzeug
 werkzeug
 if not hasattr(werkzeug, '__version__'):
     werkzeug.__version__ = "mock-version"
+    
 
 class APITestCase(unittest.TestCase):
     @classmethod
