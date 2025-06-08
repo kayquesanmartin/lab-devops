@@ -12,6 +12,7 @@ class APITestCase(unittest.TestCase):
     def setUpClass(cls):
         # Criação do cliente de teste
         cls.client = app.test_client()
+        app.config['TESTING'] = True
 
     def test_home(self):
         response = self.client.get('/')
@@ -24,6 +25,20 @@ class APITestCase(unittest.TestCase):
         self.assertIn('access_token', response.json)
 
     def test_protected_no_token(self):
+        response = self.client.get('/protected')
+        self.assertEqual(response.status_code, 401)
+
+    def test_api_root(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json, {"message": "API is running"})
+
+    def test_login_returns_token(self):
+        response = self.client.post('/login')
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('access_token' in response.json)
+
+    def test_protected_route_blocks_unauthorized(self):
         response = self.client.get('/protected')
         self.assertEqual(response.status_code, 401)
 

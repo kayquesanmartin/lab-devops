@@ -1,11 +1,7 @@
-version: '3'
-
 services:
-  api:
+  app:
     build: .
     ports:
-    - "1313:1313"
+      - "1313:1313"
     volumes:
-    - .:/app
-    environment:
-    - FLASK_ENV=development
+      - .:/app

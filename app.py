@@ -29,8 +29,9 @@ def login():
 
 @app.route('/protected', methods=['GET'])
 @jwt_required()
-def protected():
+def protected():    
     return jsonify(message="Protected route")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=1313)
+    
